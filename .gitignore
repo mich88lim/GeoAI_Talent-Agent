@@ -1,41 +1,54 @@
-# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+# ─── Secrets — NEVER commit real keys ───────────────────────────
+.env
+.env.local
+.env.*.local
 
-# dependencies
-/node_modules
-/.pnp
+# ─── Node / Next.js ─────────────────────────────────────────────
+node_modules/
+.next/
+out/
+build/
+dist/
+*.log
+npm-debug.log*
+pnpm-debug.log*
+.pnpm-store/
+*.tsbuildinfo
+next-env.d.ts
+
+# ─── Python (ingestion + scripts) ───────────────────────────────
+.venv/
+venv/
+__pycache__/
+*.pyc
+.python-version
+
+# ─── PII DATA — DO NOT COMMIT teacher names/emails ──────────────
+# Load the cleaned workbook into the database via Phase 1 ingestion.
+/db/seed/*.xlsx
+/db/seed/*.xls
+/db/seed/*.csv
+/data/
+
+# ─── Tests / coverage ───────────────────────────────────────────
+coverage/
+.nyc_output/
+
+# ─── OS / editor ────────────────────────────────────────────────
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.pem
+
+# ─── Vercel ─────────────────────────────────────────────────────
+.vercel
+
+# ─── Yarn ───────────────────────────────────────────────────────
+.pnp
 .pnp.*
 .yarn/*
 !.yarn/patches
 !.yarn/plugins
 !.yarn/releases
 !.yarn/versions
-
-# testing
-/coverage
-
-# next.js
-/.next/
-/out/
-
-# production
-/build
-
-# misc
-.DS_Store
-*.pem
-
-# debug
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-.pnpm-debug.log*
-
-# env files (can opt-in for committing if needed)
-.env*
-
-# vercel
-.vercel
-
-# typescript
-*.tsbuildinfo
-next-env.d.ts

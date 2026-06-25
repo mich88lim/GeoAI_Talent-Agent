@@ -1,0 +1,3 @@
+# Place the MASTER_LIST_V2_GeoAI_CLEANED.xlsx file here for Phase 1 ingestion.
+# This folder is gitignored (*.xlsx, *.csv are excluded to protect PII data).
+# Never commit the actual dataset.

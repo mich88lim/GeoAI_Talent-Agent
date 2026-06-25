@@ -1,26 +1,71 @@
 @import "tailwindcss";
 
+/* ── Brand design tokens ────────────────────────────────────── */
+@theme {
+  /* Colour palette */
+  --color-ink-navy:   #0E2F57;
+  --color-royal-blue: #1E63C4;
+  --color-teal:       #12B5AC;
+  --color-amber:      #F2A341;
+  --color-slate:      #15233A;
+  --color-muted:      #6B7A90;
+  --color-surface:    #F6F8FB;
+  --color-border:     #E2E8F0;
+
+  /* Typography — CSS variables injected by next/font/google */
+  --font-display: var(--font-plus-jakarta-sans), "Plus Jakarta Sans", sans-serif;
+  --font-body:    var(--font-inter), "Inter", sans-serif;
+  --font-mono:    var(--font-ibm-plex-mono), "IBM Plex Mono", monospace;
+
+  /* Radius */
+  --radius-card: 14px;
+  --radius-pill: 9999px;
+
+  /* Shadows */
+  --shadow-card: 0 1px 3px 0 rgb(0 0 0 / 0.08), 0 1px 2px -1px rgb(0 0 0 / 0.06);
+  --shadow-card-hover: 0 4px 12px 0 rgb(0 0 0 / 0.12), 0 2px 4px -1px rgb(0 0 0 / 0.08);
+}
+
+/* ── Base styles ─────────────────────────────────────────────── */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  color-scheme: light;
+  background-color: var(--color-surface);
+  color: var(--color-slate);
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+html {
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+/* ── Scrollbar styling ───────────────────────────────────────── */
+::-webkit-scrollbar       { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--color-border); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: var(--color-muted); }
+
+/* ── Focus ring ──────────────────────────────────────────────── */
+:focus-visible {
+  outline: 2px solid var(--color-royal-blue);
+  outline-offset: 2px;
+}
+
+/* ── Motion preferences ──────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* ── Page fade-in ─────────────────────────────────────────────── */
+@keyframes fadeSlideIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fade-in {
+  animation: fadeSlideIn 0.3s ease-out forwards;
 }
