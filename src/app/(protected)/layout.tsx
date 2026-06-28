@@ -1,9 +1,7 @@
 import { redirect } from 'next/navigation'
 import { createClient } from '@/lib/supabase/server'
+import { AppShell } from '@/components/shell/AppShell'
 
-// Server-side guard: only active users reach protected routes.
-// The middleware handles the redirect for most cases, but this adds
-// a server-component layer of protection for the route group.
 export default async function ProtectedLayout({
   children,
 }: {
@@ -26,5 +24,12 @@ export default async function ProtectedLayout({
     redirect('/awaiting-approval')
   }
 
-  return <>{children}</>
+  return (
+    <AppShell
+      userName={profile.full_name ?? null}
+      userRole={profile.role ?? 'user'}
+    >
+      {children}
+    </AppShell>
+  )
 }

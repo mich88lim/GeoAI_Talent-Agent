@@ -37,6 +37,9 @@ export async function proxy(request: NextRequest) {
   // Allow auth callback through unconditionally
   if (pathname.startsWith('/auth/')) return response
 
+  // API routes handle their own auth (return JSON 401, not redirects)
+  if (pathname.startsWith('/api/')) return response
+
   const isPublic = PUBLIC_PATHS.has(pathname)
 
   // ── Unauthenticated ──────────────────────────────────────────

@@ -4,7 +4,6 @@ import { useState } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { useLanguage } from '@/i18n/LanguageProvider'
-import { createClient } from '@/lib/supabase/client'
 import { Button } from '@/components/ui/Button'
 import { Input } from '@/components/ui/Input'
 import { Alert } from '@/components/ui/Alert'
@@ -22,31 +21,33 @@ export default function LoginPage() {
     setError('')
     setLoading(true)
 
-    const supabase = createClient()
-    const { error: authError } = await supabase.auth.signInWithPassword({ email, password })
+    try {
+      // Auth is proxied through Next.js so the browser never needs a direct
+      // connection to Supabase (works on restricted/firewalled networks).
+      const res = await fetch('/api/auth/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, password }),
+      })
 
-    if (authError) {
-      setError(authError.message)
-      setLoading(false)
-      return
-    }
+      const data = await res.json()
 
-    // Check profile status to route correctly
-    const { data: { user } } = await supabase.auth.getUser()
-    if (user) {
-      const { data: profile } = await supabase
-        .from('profiles')
-        .select('status')
-        .eq('user_id', user.id)
-        .single()
+      if (!res.ok) {
+        setError(data.error ?? t.common.error)
+        setLoading(false)
+        return
+      }
 
-      if (profile?.status === 'pending') {
+      if (data.profileStatus === 'pending') {
         router.push('/awaiting-approval')
       } else {
         router.push('/dashboard')
       }
+      router.refresh()
+    } catch {
+      setError(t.common.error)
+      setLoading(false)
     }
-    router.refresh()
   }
 
   return (

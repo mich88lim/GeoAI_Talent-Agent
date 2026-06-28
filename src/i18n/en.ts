@@ -56,6 +56,67 @@ export interface Translations {
     subtitle: string
     comingSoon: string
   }
+  map: {
+    heatmap: string
+    allSkillsSubjects: string
+    skillsGroup: string
+    subjectsGroup: string
+    searchRadius: string
+    kmUnit: string
+    dropPin: string
+    clearCentre: string
+    useMyLocation: string
+    statewideView: string
+    myDistrict: string
+    trainersFound: string
+    noTrainersFound: string
+    loadingMap: string
+    pinInstruction: string
+    radiusLabel: string
+    modeA: string
+    modeB: string
+    navDashboard: string
+    navSearch: string
+    navEngagements: string
+    navAdmin: string
+    navSettings: string
+    assistant: string
+    collapseNav: string
+    expandNav: string
+    openAssistant: string
+    closeAssistant: string
+    distributionView: string
+    zoomOutOverview: string
+    clickToExplore: string
+    modeALabel: string
+    modeBLabel: string
+    venueLabel: string
+    venuePlaceholder: string
+    clearVenue: string
+    dropVenuePin: string
+    filterBySkill: string
+    venueNotSet: string
+    customLocation: string
+    registryBadge: string
+    geocodeBadge: string
+    startDate: string
+    endDate: string
+    trainingTitle: string
+    findAvailableTrainers: string
+    findingTrainers: string
+    recommendations: string
+    rankLabel: string
+    distanceLabel: string
+    durationLabel: string
+    transportLabel: string
+    estimatedCost: string
+    costRoundTrip: string
+    costSourceFormula: string
+    costSourceEstimate: string
+    noAvailableTrainers: string
+    setDatesToSearch: string
+    engagementRef: string
+  }
   admin: {
     usersTitle: string
     usersSubtitle: string
@@ -142,6 +203,67 @@ export const en: Translations = {
     welcome: 'Welcome,',
     subtitle: 'GEO-TALENT AGENT — Geospatial Master Trainer Recommendation Platform',
     comingSoon: 'The map dashboard will be available in the next phase.',
+  },
+  map: {
+    heatmap: 'Trainer Heatmap',
+    allSkillsSubjects: 'All Skills & Subjects',
+    skillsGroup: 'ICT Skills',
+    subjectsGroup: 'Teaching Subjects',
+    searchRadius: 'Search Radius',
+    kmUnit: 'km',
+    dropPin: 'Drop pin',
+    clearCentre: 'Clear',
+    useMyLocation: 'My location',
+    statewideView: 'Statewide',
+    myDistrict: 'My district',
+    trainersFound: 'trainers',
+    noTrainersFound: 'No trainers in this area',
+    loadingMap: 'Loading map…',
+    pinInstruction: 'Click map to set search centre',
+    radiusLabel: 'Radius',
+    modeA: 'Explore',
+    modeB: 'Venue',
+    navDashboard: 'Dashboard',
+    navSearch: 'Search',
+    navEngagements: 'Engagements',
+    navAdmin: 'Admin',
+    navSettings: 'Settings',
+    assistant: 'Assistant',
+    collapseNav: 'Collapse',
+    expandNav: 'Expand',
+    openAssistant: 'Open assistant',
+    closeAssistant: 'Close assistant',
+    distributionView: 'Distribution view',
+    zoomOutOverview: 'Zoom out for overview',
+    clickToExplore: 'Select a PPD district pin to explore trainers nearby',
+    modeALabel: 'Explore',
+    modeBLabel: 'Find Trainers',
+    venueLabel: 'Workshop Venue',
+    venuePlaceholder: 'Search venue name or address…',
+    clearVenue: 'Clear venue',
+    dropVenuePin: 'Drop venue pin on map',
+    filterBySkill: 'Filter by skill / subject',
+    venueNotSet: 'Search or drop a pin to set the venue',
+    customLocation: 'Custom location',
+    registryBadge: 'R',
+    geocodeBadge: 'G',
+    startDate: 'Start date',
+    endDate: 'End date',
+    trainingTitle: 'Training title (optional)',
+    findAvailableTrainers: 'Find Available Trainers',
+    findingTrainers: 'Searching…',
+    recommendations: 'Recommendations',
+    rankLabel: '#',
+    distanceLabel: 'Distance',
+    durationLabel: 'Drive',
+    transportLabel: 'Transport',
+    estimatedCost: 'Est. cost',
+    costRoundTrip: 'round trip',
+    costSourceFormula: 'Formula',
+    costSourceEstimate: 'Estimate',
+    noAvailableTrainers: 'No available trainers found for these dates',
+    setDatesToSearch: 'Set training dates to find available trainers',
+    engagementRef: 'Engagement',
   },
   admin: {
     usersTitle: 'User management',
