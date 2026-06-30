@@ -64,11 +64,11 @@ export async function POST(req: NextRequest) {
     subjects:     string[] | null
     roles:        string[] | null
   }) => {
-    // Straight-line road cost estimate — labelled 'estimate' so the UI shows a caveat badge.
+    // Straight-line road cost estimate — per day (dates not yet known at search stage).
     // Rate matches computeLandCost: RM1.00/km (≤500 km one-way) or RM0.90/km (>500 km).
     const distKm  = Math.round(haversineKm(venue_lat, venue_long, row.lat, row.lng) * 10) / 10
     const rate    = distKm <= 500 ? 1.00 : 0.90
-    const costMyr = Math.round(distKm * 2 * rate * 100) / 100
+    const costMyr = Math.round(distKm * 2 * rate * 100) / 100  // per day; multiplied by days on Recommend
 
     // Sarawak domestic flight estimate: RM400 base + RM0.90/km (straight-line, round-trip indicative)
     const travelOptions: Array<{
@@ -78,7 +78,7 @@ export async function POST(req: NextRequest) {
     }> = [{
       mode: 'Road', distance_km: distKm, duration_min: 0,
       cost_myr: costMyr, cost_source: 'estimate',
-      cost_note: 'Straight-line estimate; road distance and mode may differ',
+      cost_note: `${(distKm * 2).toFixed(1)} km round trip × RM${rate.toFixed(2)}/km per day (set dates & Recommend for total)`,
     }]
 
     if (distKm > 250) {

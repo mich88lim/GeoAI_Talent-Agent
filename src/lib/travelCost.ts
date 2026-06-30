@@ -16,13 +16,15 @@ export interface LandCostResult {
 export function computeLandCost(
   distanceKm: number,
   rates: TravelRates,
+  days = 1,
 ): LandCostResult {
-  const rate = distanceKm <= 500
-    ? rates.road_per_km_0_500
-    : rates.road_per_km_over_500
+  const rate        = distanceKm <= 500 ? rates.road_per_km_0_500 : rates.road_per_km_over_500
   const roundTripKm = distanceKm * 2
-  const cost_myr    = Math.round(roundTripKm * rate * 100) / 100
-  const cost_note   = `${roundTripKm.toFixed(1)} km round trip × RM${rate.toFixed(2)}/km`
+  const safeDays    = Math.max(1, Math.round(days))
+  const cost_myr    = Math.round(roundTripKm * rate * safeDays * 100) / 100
+  const cost_note   = safeDays > 1
+    ? `${roundTripKm.toFixed(1)} km round trip × RM${rate.toFixed(2)}/km × ${safeDays} days`
+    : `${roundTripKm.toFixed(1)} km round trip × RM${rate.toFixed(2)}/km`
   return { cost_myr, cost_note, cost_source: 'formula' }
 }
 

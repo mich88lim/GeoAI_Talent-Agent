@@ -111,6 +111,10 @@ export async function POST(req: NextRequest) {
 
   // ── 3. Route + cost (parallel across all candidates) ────────────────────────────────────────
   const venueText = venue_name ?? `${venue_lat.toFixed(4)}, ${venue_long.toFixed(4)}`
+  const msPerDay  = 1000 * 60 * 60 * 24
+  const trainingDays = Math.max(1, Math.round(
+    (new Date(end_date).getTime() - new Date(start_date).getTime()) / msPerDay
+  ) + 1)
 
   // Skip OSRM for trainers > 150 km straight-line: use Haversine × 1.3 road factor instead.
   // Prevents hundreds of simultaneous external HTTP calls on large-radius searches.
@@ -133,7 +137,7 @@ export async function POST(req: NextRequest) {
       let cost_note   = ''
 
       if (mode === 'Road') {
-        const lc  = computeLandCost(route.distance_km, rates)
+        const lc  = computeLandCost(route.distance_km, rates, trainingDays)
         cost_myr    = lc.cost_myr
         cost_source = lc.cost_source
         cost_note   = lc.cost_note
